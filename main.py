@@ -30,7 +30,7 @@ def print_report(df):
     print("\nColumn Types")
     print("----------------")
     print(df.dtypes)
-
+ 
 
 def main():
     args = parse_args()
@@ -39,9 +39,14 @@ def main():
     df.to_csv(args.output, index=False)
     print_report(df)
 
+    duplicates_before = df.duplicated().sum()
+    df = df.drop_duplicates()
+
     print(f"Loaded {args.input}")
     print(f"Saved copy to {args.output}")
-    print(f"Rows: {len(df)}, Columns: {len(df.columns)}")
+    print(f"Removed {duplicates_before} duplicate rows")
+
+
 
 
 if __name__ == "__main__":
