@@ -36,11 +36,15 @@ def main():
     args = parse_args()
 
     df = pd.read_csv(args.input)
-    df.to_csv(args.output, index=False)
+    
     print_report(df)
 
     duplicates_before = df.duplicated().sum()
     df = df.drop_duplicates()
+
+    
+    df.to_csv(args.output, index=False)
+
 
     print(f"Loaded {args.input}")
     print(f"Saved copy to {args.output}")
